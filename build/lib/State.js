@@ -8,7 +8,7 @@ var PropTypes = require('./PropTypes');
  *
  * Example:
  *
- *   var AboutLink = React.createClass({
+ *   var AboutLink = createClass({
  *     mixins: [ Router.State ],
  *     render() {
  *       var className = this.props.className;

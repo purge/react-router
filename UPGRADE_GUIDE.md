@@ -27,7 +27,7 @@ stuff on context doesn't show up in a component unless you ask for it.
 
 ```js
 // 0.12.x
-var Foo = React.createClass({
+var Foo = createClass({
   mixins: [ Router.State ],
   render: function () {
     var id = this.getParams().id;
@@ -37,7 +37,7 @@ var Foo = React.createClass({
 });
 
 // 0.13.x w/o ES6 fanciness
-var Foo = React.createClass({
+var Foo = createClass({
   contextTypes: {
     router: React.PropTypes.func
   },
@@ -88,7 +88,7 @@ var searchTerm = this.props.query.searchTerm;
 
 ```js
 // 0.11.x
-var SomeHandler = React.createClass({
+var SomeHandler = createClass({
   statics: {
     willTransitionTo (transition) {
       transition.wait(somePromise());
@@ -97,7 +97,7 @@ var SomeHandler = React.createClass({
 });
 
 // 0.12.0
-var SomeHandler = React.createClass({
+var SomeHandler = createClass({
   statics: {
     willTransitionTo (transition, params, query, callback) {
       somePromise().then(callback);
@@ -160,7 +160,7 @@ Router.run(routes, function (Handler) {
 
 ```js
 // 0.10.x
-var Something = React.createClass({
+var Something = createClass({
   render: function () {
     return (
       <div>
@@ -173,7 +173,7 @@ var Something = React.createClass({
 // 0.11.x
 var RouteHandler = Router.RouteHandler;
 
-var Something = React.createClass({
+var Something = createClass({
   render: function () {
     return (
       <div>
@@ -190,7 +190,7 @@ They are no longer available on props, use the `State` mixin.
 
 ```js
 // 0.10.x
-var Something = React.createClass({
+var Something = createClass({
   render: function () {
     var name = this.props.params.name;
     var something = this.props.query.something;
@@ -209,7 +209,7 @@ Router.run(routes, function (Handler, state) {
 });
 
 // or use the `State` mixin
-var Something = React.createClass({
+var Something = createClass({
   mixins: [ Router.State ],
   render: function () {
     var name = this.getParams().name;
@@ -230,7 +230,7 @@ This mixin's name has changed, and all of its methods that had the word
 
 ```js
 // v0.10.x
-var Something = React.createClass({
+var Something = createClass({
   mixins: [ Router.ActiveState ],
   render: function () {
     var name = this.getActiveParams().name;
@@ -239,7 +239,7 @@ var Something = React.createClass({
 });
 
 // v0.11.x
-var Something = React.createClass({
+var Something = createClass({
   mixins: [ Router.State ]
   render: function () {
     var name = this.getParams().name;
@@ -254,7 +254,7 @@ You can find `this.getPath()` on the `Router.State` mixin.
 
 ```js
 // v0.10.x
-var Something = React.createClass({
+var Something = createClass({
   mixins: [ Router.CurrentPath ],
   render: function () {
     var path = this.getCurrentPath();
@@ -263,7 +263,7 @@ var Something = React.createClass({
 });
 
 // v0.11.x
-var Something = React.createClass({
+var Something = createClass({
   mixins: [ Router.State ],
   render: function () {
     var path = this.getPath();
@@ -284,7 +284,7 @@ yourself:
 </Route>
 
 // 0.11.x
-var App = React.createClass({
+var App = createClass({
   mixins: [ Router.State ],
 
   getHandlerKey: function () {
@@ -357,7 +357,7 @@ properties on your handlers.
 // 0.10.x
 <Route name="users" foo="bar" handler={Something}/>
 
-var Something = React.createClass({
+var Something = createClass({
   render () {
     return <div>{this.props.name} {this.props.foo}</div>
   }
@@ -369,7 +369,7 @@ var Something = React.createClass({
 <Route name="users" handler={makeSomething("users", "bar")}/>
 
 function makeSomething(name, foo) {
-  return React.createClass({
+  return createClass({
     render () {
       return <div>{name} {foo}</div>
     }
@@ -379,7 +379,7 @@ function makeSomething(name, foo) {
 // handler definition technique
 <Route name="users" handler={Something}/>
 
-var Something = React.createClass({
+var Something = createClass({
   foo: "bar",
   name: "users",
   render () {
@@ -404,7 +404,7 @@ will be lots of warnings in the console.
 
 ```js
 // 0.7.x
-var SomethingActive = React.createClass({
+var SomethingActive = createClass({
   mixins: [ActiveState],
 
   render: function () {
@@ -413,7 +413,7 @@ var SomethingActive = React.createClass({
 });
 
 // 0.9.x
-var SomethingActive = React.createClass({
+var SomethingActive = createClass({
   mixins: [ActiveState],
 
   render: function () {
@@ -456,7 +456,7 @@ entry, it now uses `replaceWith`.
 
 ```js
 // 0.7.x
-React.createClass({
+createClass({
   login: function () {
     // ...
     transition.retry();
@@ -464,7 +464,7 @@ React.createClass({
 });
 
 // 0.9.x
-React.createClass({
+createClass({
   mixins: [Navigation],
   login: function () {
     // ...
@@ -480,7 +480,7 @@ Transition hooks are now sync, unless you opt-in to async with
 
 ```js
 // 0.7.x
-React.createClass({
+createClass({
   statics: {
     willTransitionTo: function (transition) {
       return somePromise();
@@ -489,7 +489,7 @@ React.createClass({
 });
 
 // 0.9.x
-React.createClass({
+createClass({
   statics: {
     willTransitionTo: function (transition) {
       transition.wait(somePromise());
@@ -533,7 +533,7 @@ These methods have been moved to mixins.
 var Router = require('react-router');
 
 // 0.7.x
-React.createClass({
+createClass({
   whenever: function () {
     Router.transitionTo('something');
     Router.replaceWith('something');
@@ -544,7 +544,7 @@ React.createClass({
 // 0.9.x
 var Navigation = Router.Navigation;
 
-React.createClass({
+createClass({
   mixins: [Navigation],
   whenever: function () {
     this.transitionTo('something');
@@ -685,7 +685,7 @@ options:
 <Route handler={User} path="/user/:userId" addHandlerKey={true} />
 
 // 0.5.x
-var User = React.createClass({
+var User = createClass({
   getInitialState: function () {
     return {
       user: getUser(this.props.params.userId);
@@ -694,7 +694,7 @@ var User = React.createClass({
 });
 
 // 0.6.x
-var User = React.createClass({
+var User = createClass({
   getInitialState: function () {
     return this.getState();
   },
@@ -750,7 +750,7 @@ NPM users should point their apps to `react-router` instead of
 ```js
 // 0.2.x
 
-var App = React.createClass({
+var App = createClass({
   render: function () {
     return (
       <div>
@@ -761,7 +761,7 @@ var App = React.createClass({
 });
 
 // 0.3.x
-var App = React.createClass({
+var App = createClass({
   render: function () {
     // now you can send extra props to the active route handler
     // and use the new jsx syntax

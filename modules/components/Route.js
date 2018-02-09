@@ -1,6 +1,7 @@
 var React = require('react');
+var createClass = require('create-react-class')
 var invariant = require('invariant');
-var PropTypes = require('../PropTypes');
+var PropTypes = require('prop-types');
 var RouteHandler = require('./RouteHandler');
 
 /**
@@ -31,7 +32,7 @@ var RouteHandler = require('./RouteHandler');
  * Handlers for Route components that contain children can render their active
  * child route using a <RouteHandler> element.
  *
- *   var App = React.createClass({
+ *   var App = createClass({
  *     render: function () {
  *       return (
  *         <div className="application">

@@ -1,8 +1,8 @@
 var assign = require('object-assign');
-var ReactPropTypes = require('react').PropTypes;
+var ReactPropTypes = require('prop-types');
 var Route = require('./Route');
 
-var PropTypes = assign({}, ReactPropTypes, {
+var PropTypes = {
 
   /**
    * Indicates that a prop should be falsy.
@@ -23,6 +23,9 @@ var PropTypes = assign({}, ReactPropTypes, {
   //router: ReactPropTypes.instanceOf(Router) // TODO
   router: ReactPropTypes.func
 
-});
+};
 
-module.exports = PropTypes;
+export default {
+  ...PropTypes,
+  ...ReactPropTypes,
+};

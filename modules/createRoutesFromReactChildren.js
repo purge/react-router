@@ -6,19 +6,7 @@ var DefaultRoute = require('./components/DefaultRoute');
 var NotFoundRoute = require('./components/NotFoundRoute');
 var Redirect = require('./components/Redirect');
 var Route = require('./Route');
-
-function checkPropTypes(componentName, propTypes, props) {
-  componentName = componentName || 'UnknownComponent';
-
-  for (var propName in propTypes) {
-    if (propTypes.hasOwnProperty(propName)) {
-      var error = propTypes[propName](props, propName, componentName);
-
-      if (error instanceof Error)
-        warning(false, error.message);
-    }
-  }
-}
+var PropTypes = require('./PropTypes');
 
 function createRouteOptions(props) {
   var options = assign({}, props);
@@ -40,7 +28,7 @@ function createRouteFromReactElement(element) {
   var props = assign({}, type.defaultProps, element.props);
 
   if (type.propTypes)
-    checkPropTypes(type.displayName, type.propTypes, props);
+    PropTypes.checkPropTypes(type.propTypes, props, 'props', type.displayName );
 
   if (type === DefaultRoute)
     return Route.createDefaultRoute(createRouteOptions(props));
