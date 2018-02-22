@@ -58,33 +58,33 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.DefaultRoute = __webpack_require__(1);
 	exports.Link = __webpack_require__(26);
-	exports.NotFoundRoute = __webpack_require__(27);
-	exports.Redirect = __webpack_require__(28);
+	exports.NotFoundRoute = __webpack_require__(28);
+	exports.Redirect = __webpack_require__(29);
 	exports.Route = __webpack_require__(21);
 	exports.ActiveHandler = __webpack_require__(18);
 	exports.RouteHandler = exports.ActiveHandler;
 
-	exports.HashLocation = __webpack_require__(29);
-	exports.HistoryLocation = __webpack_require__(33);
-	exports.RefreshLocation = __webpack_require__(34);
-	exports.StaticLocation = __webpack_require__(35);
-	exports.TestLocation = __webpack_require__(36);
+	exports.HashLocation = __webpack_require__(30);
+	exports.HistoryLocation = __webpack_require__(34);
+	exports.RefreshLocation = __webpack_require__(35);
+	exports.StaticLocation = __webpack_require__(36);
+	exports.TestLocation = __webpack_require__(37);
 
-	exports.ImitateBrowserBehavior = __webpack_require__(37);
-	exports.ScrollToTopBehavior = __webpack_require__(38);
+	exports.ImitateBrowserBehavior = __webpack_require__(38);
+	exports.ScrollToTopBehavior = __webpack_require__(39);
 
-	exports.History = __webpack_require__(31);
-	exports.Navigation = __webpack_require__(39);
-	exports.State = __webpack_require__(40);
+	exports.History = __webpack_require__(32);
+	exports.Navigation = __webpack_require__(40);
+	exports.State = __webpack_require__(41);
 
 	exports.createRoute = __webpack_require__(9).createRoute;
 	exports.createDefaultRoute = __webpack_require__(9).createDefaultRoute;
 	exports.createNotFoundRoute = __webpack_require__(9).createNotFoundRoute;
 	exports.createRedirect = __webpack_require__(9).createRedirect;
-	exports.createRoutesFromReactChildren = __webpack_require__(41);
+	exports.createRoutesFromReactChildren = __webpack_require__(42);
 
-	exports.create = __webpack_require__(42);
-	exports.run = __webpack_require__(51);
+	exports.create = __webpack_require__(43);
+	exports.run = __webpack_require__(52);
 
 /***/ }),
 /* 1 */
@@ -2708,6 +2708,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var React = __webpack_require__(19);
 	var assign = __webpack_require__(3);
 	var PropTypes = __webpack_require__(2);
+	var DOM = __webpack_require__(27);
 
 	function isLeftClickEvent(event) {
 	  return event.button === 0;
@@ -2810,7 +2811,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      delete props.activeClassName;
 	      delete props.activeStyle;
 
-	      return React.DOM.a(props, this.props.children);
+	      return DOM.a(props, this.props.children);
 	    }
 	  }]);
 
@@ -2839,6 +2840,207 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 /* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	/**
+	 * Copyright (c) 2015-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
+
+	(function(f) {
+	  if (true) {
+	    module.exports = f(__webpack_require__(19));
+	    /* global define */
+	  } else if (typeof define === 'function' && define.amd) {
+	    define(['react'], f);
+	  } else {
+	    var g;
+	    if (typeof window !== 'undefined') {
+	      g = window;
+	    } else if (typeof global !== 'undefined') {
+	      g = global;
+	    } else if (typeof self !== 'undefined') {
+	      g = self;
+	    } else {
+	      g = this;
+	    }
+
+	    if (typeof g.React === 'undefined') {
+	      throw Error('React module should be required before ReactDOMFactories');
+	    }
+
+	    g.ReactDOMFactories = f(g.React);
+	  }
+	})(function(React) {
+	  /**
+	   * Create a factory that creates HTML tag elements.
+	   */
+	  function createDOMFactory(type) {
+	    var factory = React.createElement.bind(null, type);
+	    // Expose the type on the factory and the prototype so that it can be
+	    // easily accessed on elements. E.g. `<Foo />.type === Foo`.
+	    // This should not be named `constructor` since this may not be the function
+	    // that created the element, and it may not even be a constructor.
+	    factory.type = type;
+	    return factory;
+	  };
+
+	  /**
+	   * Creates a mapping from supported HTML tags to `ReactDOMComponent` classes.
+	   */
+	  var ReactDOMFactories = {
+	    a: createDOMFactory('a'),
+	    abbr: createDOMFactory('abbr'),
+	    address: createDOMFactory('address'),
+	    area: createDOMFactory('area'),
+	    article: createDOMFactory('article'),
+	    aside: createDOMFactory('aside'),
+	    audio: createDOMFactory('audio'),
+	    b: createDOMFactory('b'),
+	    base: createDOMFactory('base'),
+	    bdi: createDOMFactory('bdi'),
+	    bdo: createDOMFactory('bdo'),
+	    big: createDOMFactory('big'),
+	    blockquote: createDOMFactory('blockquote'),
+	    body: createDOMFactory('body'),
+	    br: createDOMFactory('br'),
+	    button: createDOMFactory('button'),
+	    canvas: createDOMFactory('canvas'),
+	    caption: createDOMFactory('caption'),
+	    cite: createDOMFactory('cite'),
+	    code: createDOMFactory('code'),
+	    col: createDOMFactory('col'),
+	    colgroup: createDOMFactory('colgroup'),
+	    data: createDOMFactory('data'),
+	    datalist: createDOMFactory('datalist'),
+	    dd: createDOMFactory('dd'),
+	    del: createDOMFactory('del'),
+	    details: createDOMFactory('details'),
+	    dfn: createDOMFactory('dfn'),
+	    dialog: createDOMFactory('dialog'),
+	    div: createDOMFactory('div'),
+	    dl: createDOMFactory('dl'),
+	    dt: createDOMFactory('dt'),
+	    em: createDOMFactory('em'),
+	    embed: createDOMFactory('embed'),
+	    fieldset: createDOMFactory('fieldset'),
+	    figcaption: createDOMFactory('figcaption'),
+	    figure: createDOMFactory('figure'),
+	    footer: createDOMFactory('footer'),
+	    form: createDOMFactory('form'),
+	    h1: createDOMFactory('h1'),
+	    h2: createDOMFactory('h2'),
+	    h3: createDOMFactory('h3'),
+	    h4: createDOMFactory('h4'),
+	    h5: createDOMFactory('h5'),
+	    h6: createDOMFactory('h6'),
+	    head: createDOMFactory('head'),
+	    header: createDOMFactory('header'),
+	    hgroup: createDOMFactory('hgroup'),
+	    hr: createDOMFactory('hr'),
+	    html: createDOMFactory('html'),
+	    i: createDOMFactory('i'),
+	    iframe: createDOMFactory('iframe'),
+	    img: createDOMFactory('img'),
+	    input: createDOMFactory('input'),
+	    ins: createDOMFactory('ins'),
+	    kbd: createDOMFactory('kbd'),
+	    keygen: createDOMFactory('keygen'),
+	    label: createDOMFactory('label'),
+	    legend: createDOMFactory('legend'),
+	    li: createDOMFactory('li'),
+	    link: createDOMFactory('link'),
+	    main: createDOMFactory('main'),
+	    map: createDOMFactory('map'),
+	    mark: createDOMFactory('mark'),
+	    menu: createDOMFactory('menu'),
+	    menuitem: createDOMFactory('menuitem'),
+	    meta: createDOMFactory('meta'),
+	    meter: createDOMFactory('meter'),
+	    nav: createDOMFactory('nav'),
+	    noscript: createDOMFactory('noscript'),
+	    object: createDOMFactory('object'),
+	    ol: createDOMFactory('ol'),
+	    optgroup: createDOMFactory('optgroup'),
+	    option: createDOMFactory('option'),
+	    output: createDOMFactory('output'),
+	    p: createDOMFactory('p'),
+	    param: createDOMFactory('param'),
+	    picture: createDOMFactory('picture'),
+	    pre: createDOMFactory('pre'),
+	    progress: createDOMFactory('progress'),
+	    q: createDOMFactory('q'),
+	    rp: createDOMFactory('rp'),
+	    rt: createDOMFactory('rt'),
+	    ruby: createDOMFactory('ruby'),
+	    s: createDOMFactory('s'),
+	    samp: createDOMFactory('samp'),
+	    script: createDOMFactory('script'),
+	    section: createDOMFactory('section'),
+	    select: createDOMFactory('select'),
+	    small: createDOMFactory('small'),
+	    source: createDOMFactory('source'),
+	    span: createDOMFactory('span'),
+	    strong: createDOMFactory('strong'),
+	    style: createDOMFactory('style'),
+	    sub: createDOMFactory('sub'),
+	    summary: createDOMFactory('summary'),
+	    sup: createDOMFactory('sup'),
+	    table: createDOMFactory('table'),
+	    tbody: createDOMFactory('tbody'),
+	    td: createDOMFactory('td'),
+	    textarea: createDOMFactory('textarea'),
+	    tfoot: createDOMFactory('tfoot'),
+	    th: createDOMFactory('th'),
+	    thead: createDOMFactory('thead'),
+	    time: createDOMFactory('time'),
+	    title: createDOMFactory('title'),
+	    tr: createDOMFactory('tr'),
+	    track: createDOMFactory('track'),
+	    u: createDOMFactory('u'),
+	    ul: createDOMFactory('ul'),
+	    var: createDOMFactory('var'),
+	    video: createDOMFactory('video'),
+	    wbr: createDOMFactory('wbr'),
+
+	    // SVG
+	    circle: createDOMFactory('circle'),
+	    clipPath: createDOMFactory('clipPath'),
+	    defs: createDOMFactory('defs'),
+	    ellipse: createDOMFactory('ellipse'),
+	    g: createDOMFactory('g'),
+	    image: createDOMFactory('image'),
+	    line: createDOMFactory('line'),
+	    linearGradient: createDOMFactory('linearGradient'),
+	    mask: createDOMFactory('mask'),
+	    path: createDOMFactory('path'),
+	    pattern: createDOMFactory('pattern'),
+	    polygon: createDOMFactory('polygon'),
+	    polyline: createDOMFactory('polyline'),
+	    radialGradient: createDOMFactory('radialGradient'),
+	    rect: createDOMFactory('rect'),
+	    stop: createDOMFactory('stop'),
+	    svg: createDOMFactory('svg'),
+	    text: createDOMFactory('text'),
+	    tspan: createDOMFactory('tspan'),
+	  };
+
+	  // due to wrapper and conditionals at the top, this will either become
+	  // `module.exports ReactDOMFactories` if that is available,
+	  // otherwise it will be defined via `define(['react'], ReactDOMFactories)`
+	  // if that is available,
+	  // otherwise it will be defined as global variable.
+	  return ReactDOMFactories;
+	});
+
+
+
+/***/ }),
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2891,7 +3093,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = NotFoundRoute;
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2939,13 +3141,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Redirect;
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var LocationActions = __webpack_require__(30);
-	var History = __webpack_require__(31);
+	var LocationActions = __webpack_require__(31);
+	var History = __webpack_require__(32);
 
 	var _listeners = [];
 	var _isListening = false;
@@ -3055,7 +3257,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = HashLocation;
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports) {
 
 	/**
@@ -3085,13 +3287,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = LocationActions;
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var invariant = __webpack_require__(10);
-	var canUseDOM = __webpack_require__(32);
+	var canUseDOM = __webpack_require__(33);
 
 	var History = {
 
@@ -3120,7 +3322,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = History;
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports) {
 
 	var canUseDOM = !!(
@@ -3132,13 +3334,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = canUseDOM;
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var LocationActions = __webpack_require__(30);
-	var History = __webpack_require__(31);
+	var LocationActions = __webpack_require__(31);
+	var History = __webpack_require__(32);
 
 	var _listeners = [];
 	var _isListening = false;
@@ -3221,13 +3423,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = HistoryLocation;
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var HistoryLocation = __webpack_require__(33);
-	var History = __webpack_require__(31);
+	var HistoryLocation = __webpack_require__(34);
+	var History = __webpack_require__(32);
 
 	/**
 	 * A Location that uses full page refreshes. This is used as
@@ -3257,7 +3459,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = RefreshLocation;
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3311,7 +3513,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = StaticLocation;
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3321,8 +3523,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 	var invariant = __webpack_require__(10);
-	var LocationActions = __webpack_require__(30);
-	var History = __webpack_require__(31);
+	var LocationActions = __webpack_require__(31);
+	var History = __webpack_require__(32);
 
 	/**
 	 * A location that is convenient for testing and does not require a DOM.
@@ -3406,12 +3608,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = TestLocation;
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var LocationActions = __webpack_require__(30);
+	var LocationActions = __webpack_require__(31);
 
 	/**
 	 * A scroll behavior that attempts to imitate the default behavior
@@ -3440,7 +3642,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ImitateBrowserBehavior;
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports) {
 
 	/**
@@ -3460,7 +3662,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ScrollToTopBehavior;
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3535,7 +3737,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Navigation;
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3614,7 +3816,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = State;
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* jshint -W084 */
@@ -3624,8 +3826,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var assign = __webpack_require__(3);
 	var warning = __webpack_require__(11);
 	var DefaultRoute = __webpack_require__(1);
-	var NotFoundRoute = __webpack_require__(27);
-	var Redirect = __webpack_require__(28);
+	var NotFoundRoute = __webpack_require__(28);
+	var Redirect = __webpack_require__(29);
 	var Route = __webpack_require__(9);
 	var PropTypes = __webpack_require__(2);
 
@@ -3689,7 +3891,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = createRoutesFromReactChildren;
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* jshint -W058 */
@@ -3699,24 +3901,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	var createClass = __webpack_require__(22);
 	var warning = __webpack_require__(11);
 	var invariant = __webpack_require__(10);
-	var canUseDOM = __webpack_require__(32);
-	var LocationActions = __webpack_require__(30);
-	var ImitateBrowserBehavior = __webpack_require__(37);
-	var HashLocation = __webpack_require__(29);
-	var HistoryLocation = __webpack_require__(33);
-	var RefreshLocation = __webpack_require__(34);
-	var StaticLocation = __webpack_require__(35);
-	var ScrollHistory = __webpack_require__(43);
-	var createRoutesFromReactChildren = __webpack_require__(41);
-	var isReactChildren = __webpack_require__(45);
-	var Transition = __webpack_require__(46);
+	var canUseDOM = __webpack_require__(33);
+	var LocationActions = __webpack_require__(31);
+	var ImitateBrowserBehavior = __webpack_require__(38);
+	var HashLocation = __webpack_require__(30);
+	var HistoryLocation = __webpack_require__(34);
+	var RefreshLocation = __webpack_require__(35);
+	var StaticLocation = __webpack_require__(36);
+	var ScrollHistory = __webpack_require__(44);
+	var createRoutesFromReactChildren = __webpack_require__(42);
+	var isReactChildren = __webpack_require__(46);
+	var Transition = __webpack_require__(47);
 	var PropTypes = __webpack_require__(2);
-	var Redirect = __webpack_require__(48);
-	var History = __webpack_require__(31);
-	var Cancellation = __webpack_require__(47);
-	var Match = __webpack_require__(49);
+	var Redirect = __webpack_require__(49);
+	var History = __webpack_require__(32);
+	var Cancellation = __webpack_require__(48);
+	var Match = __webpack_require__(50);
 	var Route = __webpack_require__(9);
-	var supportsHistory = __webpack_require__(50);
+	var supportsHistory = __webpack_require__(51);
 	var PathUtils = __webpack_require__(12);
 
 	/**
@@ -4207,14 +4409,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = createRouter;
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var invariant = __webpack_require__(10);
-	var canUseDOM = __webpack_require__(32);
-	var getWindowScrollPosition = __webpack_require__(44);
+	var canUseDOM = __webpack_require__(33);
+	var getWindowScrollPosition = __webpack_require__(45);
 
 	function shouldUpdateScroll(state, prevState) {
 	  if (!prevState) return true;
@@ -4287,13 +4489,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ScrollHistory;
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var invariant = __webpack_require__(10);
-	var canUseDOM = __webpack_require__(32);
+	var canUseDOM = __webpack_require__(33);
 
 	/**
 	 * Returns the current scroll position of the window as { x, y }.
@@ -4310,7 +4512,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = getWindowScrollPosition;
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4328,15 +4530,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = isReactChildren;
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* jshint -W058 */
 
 	'use strict';
 
-	var Cancellation = __webpack_require__(47);
-	var Redirect = __webpack_require__(48);
+	var Cancellation = __webpack_require__(48);
+	var Redirect = __webpack_require__(49);
 
 	/**
 	 * Encapsulates a transition to a given path.
@@ -4408,7 +4610,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Transition;
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports) {
 
 	/**
@@ -4422,7 +4624,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Cancellation;
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports) {
 
 	/**
@@ -4439,7 +4641,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Redirect;
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* jshint -W084 */
@@ -4519,7 +4721,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Match;
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -4540,12 +4742,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = supportsHistory;
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var createRouter = __webpack_require__(42);
+	var createRouter = __webpack_require__(43);
 
 	/**
 	 * A high-level convenience method that creates, configures, and

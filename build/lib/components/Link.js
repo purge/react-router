@@ -11,6 +11,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 var React = require('react');
 var assign = require('object-assign');
 var PropTypes = require('../PropTypes');
+var DOM = require('react-dom-factories');
 
 function isLeftClickEvent(event) {
   return event.button === 0;
@@ -113,7 +114,7 @@ var Link = (function (_React$Component) {
       delete props.activeClassName;
       delete props.activeStyle;
 
-      return React.DOM.a(props, this.props.children);
+      return DOM.a(props, this.props.children);
     }
   }]);
 
